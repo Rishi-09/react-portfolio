@@ -48,10 +48,10 @@ export const DraggableCardBody = ({
     const updateConstraints = () => {
       if (typeof window !== "undefined") {
         setConstraints({
-          top: -window.innerHeight / 2,
-          left: -window.innerWidth / 2,
-          right: window.innerWidth / 2,
-          bottom: window.innerHeight / 2,
+          top: -window.innerHeight / 4,
+          left: -window.innerWidth / 4,
+          right: window.innerWidth / 4,
+          bottom: window.innerHeight / 4,
         });
       }
     };
@@ -113,7 +113,7 @@ export const DraggableCardBody = ({
 
         const velocityMagnitude = Math.sqrt(currentVelocityX * currentVelocityX +
           currentVelocityY * currentVelocityY);
-        const bounce = Math.min(0.8, velocityMagnitude / 1000);
+        const bounce = Math.min(0.7, velocityMagnitude / 2500);
 
         animate(info.point.x, info.point.x + currentVelocityX * 0.3, {
           duration: 0.8,
@@ -146,7 +146,7 @@ export const DraggableCardBody = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "relative min-h-96 w-80 overflow-hidden rounded-md bg-neutral-100 p-6 shadow-2xl transform-3d dark:bg-neutral-900",
+        "relative min-h-96 w-80 overflow-hidden rounded-md  bg-gradient-to-b from-neutral-50 to-neutral-400 p-6 shadow-2xl transform-3d dark:bg-neutral-900",
         className
       )}>
       {children}
@@ -154,7 +154,7 @@ export const DraggableCardBody = ({
         style={{
           opacity: glareOpacity,
         }}
-        className="pointer-events-none absolute inset-0 bg-white select-none" />
+        className="pointer-events-none absolute inset-0 bg-amber-100 select-none" />
     </motion.div>
   );
 };
@@ -163,5 +163,5 @@ export const DraggableCardContainer = ({
   className,
   children
 }) => {
-  return (<div className={cn("[perspective:3000px]", className)}>{children}</div>);
+  return (<div className={cn("[perspective:2000px]", className)}>{children}</div>);
 };
