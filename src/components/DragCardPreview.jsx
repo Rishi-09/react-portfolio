@@ -7,47 +7,51 @@ import {
 export function DraggableCardDemo() {
   const items = [
     {
-      title: "Tyler Durden",
+      title: "HTML",
       image:
-        "https://images.unsplash.com/photo-1732310216648-603c0255c000?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://imgs.search.brave.com/9amJBleXPqMl_S8KhXNp-AfRKT-uDn_yKz97NMAPiRo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMuZGhpd2lzZS5j/b20vbmV3LWFzc2V0/cy9odG1sLndlYnA_/dz0xMjAwJnE9OTAm/YXV0bz1mb3JtYXQ",
       className: "absolute top-10 left-[20%] rotate-[-5deg]",
     },
     {
-      title: "The Narrator",
+      title: "CSS",
       image:
-        "https://images.unsplash.com/photo-1697909623564-3dae17f6c20b?q=80&w=2667&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://imgs.search.brave.com/gw1Io5ERiAK5LkHwbv-V_MJgMAqYVOBj1_s5JFmNhK8/rs:fit:0:180:1:0/g:ce/aHR0cHM6Ly9jZG4u/aWNvbnNjb3V0LmNv/bS9pY29uL2ZyZWUv/cG5nLTI1Ni9mcmVl/LWNzcy1hbHQtbG9n/by1pY29uLXN2Zy1k/b3dubG9hZC1wbmct/Mjk0NDgxMS5wbmc_/Zj13ZWJwJnc9MTI4",
       className: "absolute top-40 left-[25%] rotate-[-7deg]",
     },
     {
-      title: "Iceland",
+      title: "Javascript",
       image:
-        "https://images.unsplash.com/photo-1501854140801-50d01698950b?q=80&w=2600&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://imgs.search.brave.com/4t9YQfbfRwsfFFzQUZWfbYl3QzCn-TUGjKCOXIpifr4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZnJlZXBuZ2xvZ29z/LmNvbS91cGxvYWRz/L2phdmFzY3JpcHQt/cG5nL2pzLWxvZ28t/cG5nLTUucG5n",
       className: "absolute top-5 left-[40%] rotate-[8deg]",
     },
     {
-      title: "Japan",
+      title: "node.js",
       image:
-        "https://images.unsplash.com/photo-1518173946687-a4c8892bbd9f?q=80&w=3648&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://imgs.search.brave.com/CnhMVsaOcdNqG9yXJc6reDgL8mWiho0J_ka56dME2II/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc2Vla2xvZ28u/Y29tL2xvZ28tcG5n/LzI3LzIvbm9kZS1q/cy1sb2dvLXBuZ19z/ZWVrbG9nby0yNzM3/NDkucG5n",
       className: "absolute top-32 left-[55%] rotate-[10deg]",
     },
     {
-      title: "Norway",
+      title: "express.js",
       image:
-        "https://images.unsplash.com/photo-1421789665209-c9b2a435e3dc?q=80&w=3542&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      className: "absolute top-20 right-[35%] rotate-[2deg]",
+        "https://imgs.search.brave.com/xQg67AOyd66TA98I_Aj0FNJFjjiWpp2bzn0tG4yPCBI/rs:fit:0:180:1:0/g:ce/aHR0cHM6Ly9jZG4u/aWNvbnNjb3V0LmNv/bS9pY29uL3ByZW1p/dW0vcG5nLTI1Ni10/aHVtYi9leHByZXNz/LWpzLWljb24tc3Zn/LWRvd25sb2FkLXBu/Zy05MjAwNjcwLnBu/Zz9mPXdlYnAmdz0x/Mjg",
+      className: "absolute top-20 right-[35%] w-92  rotate-[2deg]",
     },
     {
-      title: "New Zealand",
+      title: "React.js",
       image:
-        "https://images.unsplash.com/photo-1505142468610-359e7d316be0?q=80&w=3070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://imgs.search.brave.com/zEJV_fI6CXTLHoqHOAJWUdpFRlwRASyN4W-rYPxo6CM/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWcu/aWNvbnM4LmNvbS9w/bGFzdGljaW5lLzEy/MDAvcmVhY3QuanBn",
       className: "absolute top-24 left-[45%] rotate-[-7deg]",
     },
     {
-      title: "Canada",
+      title: "mongoDB",
       image:
-        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://imgs.search.brave.com/-UhMAUIB50O8l30_PutSK8abSIm2aki2jgn5ud-rcR4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMuc2Vla2xvZ28u/Y29tL2xvZ28tcG5n/LzUwLzEvbW9uZ29k/Yi1pY29uLWxvZ28t/cG5nX3NlZWtsb2dv/LTUwMzI3NC5wbmc",
       className: "absolute top-8 left-[30%] rotate-[4deg]",
-    },
+    },{
+      title:"python",
+      image:"https://imgs.search.brave.com/t9Bar_acPPwiD484z37Fc90Xf-MGHmpn-c6nZYd1AX8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2E4L2M5/LzM0L2E4YzkzNGE2/YmQyNDNkZTZlNjNh/YWYwNzJjNjkwMTNj/LmpwZw",
+      className : "absolute top-24 left-[45%] rotate-[-7deg]"
+    }
   ];
   return (
     <DraggableCardContainer
