@@ -1,7 +1,7 @@
-<h1 align="center">🎨 Background Gradient Animation</h1>
+<h1 align="center">🎨 My Portfolio using react</h1>
 
 <p align="center">
-A minimal React + Tailwind + Shadcn/UI project featuring a full-screen animated gradient background.
+A minimal React + Tailwind + Shadcn/UI project featuring a full-screen animated gradient background or a dynamic background names background-boxes.
 </p>
 
 ---
