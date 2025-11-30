@@ -1,43 +1,51 @@
-import React, { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
 
 interface MagneticProps {
-  children: React.ReactNode;
+  children: React.ReactElement; // Restrict to single element for cloneElement
   className?: string;
-  strength?: number; // How strong the pull is (default 0.2)
 }
 
-const Magnetic: React.FC<MagneticProps> = ({ children, className = '', strength = 0.3 }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+const Magnetic: React.FC<MagneticProps> = ({ children }) => {
+  const magnetic = useRef<HTMLDivElement>(null);
 
-  const handleMouse = (e: React.MouseEvent) => {
-    const { clientX, clientY } = e;
-    const { height, width, left, top } = ref.current!.getBoundingClientRect();
-    
-    const middleX = clientX - (left + width / 2);
-    const middleY = clientY - (top + height / 2);
-    
-    setPosition({ x: middleX * strength, y: middleY * strength });
-  };
+  useEffect(() => {
+    if (!magnetic.current) return;
 
-  const reset = () => {
-    setPosition({ x: 0, y: 0 });
-  };
+    const xTo = gsap.quickTo(magnetic.current, "x", { duration: 1, ease: "elastic.out(1, 0.3)" });
+    const yTo = gsap.quickTo(magnetic.current, "y", { duration: 1, ease: "elastic.out(1, 0.3)" });
 
-  const { x, y } = position;
-  return (
-    <motion.div
-      ref={ref}
-      className={`magnetic-trigger ${className}`}
-      animate={{ x, y }}
-      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-      onMouseMove={handleMouse}
-      onMouseLeave={reset}
-    >
-      {children}
-    </motion.div>
-  );
+    const mouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const { height, width, left, top } = magnetic.current!.getBoundingClientRect();
+      const x = clientX - (left + width / 2);
+      const y = clientY - (top + height / 2);
+      
+      xTo(x * 0.35); // Strength of magnetic pull
+      yTo(y * 0.35);
+    };
+
+    const mouseLeave = () => {
+      xTo(0);
+      yTo(0);
+    };
+
+    magnetic.current.addEventListener("mousemove", mouseMove);
+    magnetic.current.addEventListener("mouseleave", mouseLeave);
+
+    return () => {
+      if (magnetic.current) {
+        magnetic.current.removeEventListener("mousemove", mouseMove);
+        magnetic.current.removeEventListener("mouseleave", mouseLeave);
+      }
+    };
+  }, []);
+
+  // Clone the child to add the ref and class
+  return React.cloneElement(children as React.ReactElement<any>, {
+    ref: magnetic,
+    className: `${(children.props as any).className || ''} magnetic-trigger inline-block`,
+  });
 };
 
 export default Magnetic;

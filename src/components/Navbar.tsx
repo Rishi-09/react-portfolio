@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import type { NavItem } from '../types';
+import Magnetic from '../ui/Magnetic';
 
 const navItems: NavItem[] = [
   { id: 'home', label: 'Home' },
@@ -70,38 +71,43 @@ const Navbar: React.FC = () => {
         `}
       >
         {/* Logo */}
-        <a href="#home" className="text-xl md:text-2xl font-bold text-amber-50 ">
-          Rishi.
-        </a>
+        <Magnetic>
+            <a href="#home" className="text-xl md:text-2xl font-bold text-amber-50">
+            Rishi.
+            </a>
+        </Magnetic>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-2 items-center">
           {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => scrollToSection(item.id)}
-              className={`relative px-4 py-2 text-sm font-medium transition-colors hover:text-white ${
-                activeSection === item.id ? 'text-white' : 'text-slate-400'
-              }`}
-            >
-              {item.label}
-              {activeSection === item.id && (
-                <motion.div
-                  layoutId="activeTab"
-                  className="absolute bottom-1 left-0 right-0 h-0.5 bg-linear-to-r from-cyan-400 to-purple-500 rounded-full mx-auto w-1/2"
-                />
-              )}
-            </button>
+            <Magnetic key={item.id}>
+                <button
+                onClick={() => scrollToSection(item.id)}
+                className={`relative px-4 py-2 text-sm font-medium transition-colors hover:text-white ${
+                    activeSection === item.id ? 'text-white' : 'text-slate-400'
+                }`}
+                >
+                {item.label}
+                {activeSection === item.id && (
+                    <motion.div
+                    layoutId="activeTab"
+                    className="absolute bottom-1 left-0 right-0 h-0.5 bg-linear-to-r from-cyan-400 to-purple-500 rounded-full mx-auto w-1/2"
+                    />
+                )}
+                </button>
+            </Magnetic>
           ))}
           
           <div className="ml-4">
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              onClick={() => scrollToSection('contact')}
-              className="px-5 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 text-white text-sm font-medium transition-all backdrop-blur-sm"
-            >
-              Hire Me
-            </motion.button>
+            <Magnetic>
+                <motion.button
+                whileTap={{ scale: 0.95 }}
+                onClick={() => scrollToSection('contact')}
+                className="px-5 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 text-white text-sm font-medium transition-all backdrop-blur-sm"
+                >
+                Hire Me
+                </motion.button>
+            </Magnetic>
           </div>
         </div>
 
@@ -124,7 +130,7 @@ const Navbar: React.FC = () => {
             className={`
               absolute top-full left-0 right-0 z-40
               ${scrolled ? 'mt-2 w-[95%] mx-auto rounded-2xl' : 'mt-0 w-full'}
-              backdrop-blur-xl border border-white/10 overflow-hidden shadow-2xl
+              backdrop-blur-xl border border-white/10 overflow-hidden shadow-2xl bg-amber-50/10
             `}
           >
             <div className="flex flex-col p-6 space-y-4">

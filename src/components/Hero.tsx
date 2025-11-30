@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
 import TextReveal from '../ui/TextReveal';
+import Magnetic from '../ui/Magnetic';
+import Typewriter from '../ui/Typewriter';
 
 const Hero: React.FC<{ id: string }> = ({ id }) => {
   return (
@@ -35,30 +37,43 @@ const Hero: React.FC<{ id: string }> = ({ id }) => {
              </div>
           </div>
           
-          <p className="text-lg text-slate-300 mb-8 max-w-lg leading-relaxed">
-            I'm a Creative Developer specialized in Backend.
-          </p>
+          <div className="text-lg text-slate-300 mb-8 max-w-lg leading-relaxed h-16 md:h-20">
+            <Typewriter 
+              sentences={[
+                "I am a creative developer, specialized in backend.",
+                "I am seeking a career in Artificial Intelligence.",
+                "I am seeking opportunities."
+              ]}
+              typingSpeed={50}
+              deletingSpeed={30}
+              className="block"
+            />
+          </div>
           
           <div className="flex flex-wrap gap-4">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="group relative px-8 py-3 rounded-full bg-white text-slate-900 font-semibold flex items-center gap-2 overflow-hidden"
-              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth'})}
-            >
-              <span className="relative z-10">View Projects</span>
-              <ArrowRight size={18} className="relative z-10 transition-transform group-hover:translate-x-1" />
-              <div className="absolute inset-0 bg-linear-to-r from-cyan-300 to-cyan-100 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </motion.button>
+            <Magnetic>
+                <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="group relative px-8 py-3 rounded-full bg-white text-slate-900 font-semibold flex items-center gap-2 overflow-hidden"
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth'})}
+                >
+                <span className="relative z-10">View Projects</span>
+                <ArrowRight size={18} className="relative z-10 transition-transform group-hover:translate-x-1" />
+                <div className="absolute inset-0 bg-linear-to-r from-cyan-300 to-cyan-100 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </motion.button>
+            </Magnetic>
             
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-3 rounded-full bg-white/5 border border-white/10 text-white font-semibold flex items-center gap-2 hover:bg-white/10 transition-colors backdrop-blur-sm"
-            >
-              <span>Resume</span>
-              <Download size={18} />
-            </motion.button>
+            <Magnetic>
+                <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-3 rounded-full bg-white/5 border border-white/10 text-white font-semibold flex items-center gap-2 hover:bg-white/10 transition-colors backdrop-blur-sm"
+                >
+                <span>Resume</span>
+                <Download size={18} />
+                </motion.button>
+            </Magnetic>
           </div>
         </motion.div>
 

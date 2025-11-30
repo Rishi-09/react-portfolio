@@ -1,18 +1,18 @@
-
 import React from 'react';
-import type {ReactNode} from 'react'
+import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
-
-interface GlassCardProps {
+import type {HTMLMotionProps} from 'framer-motion'
+interface GlassCardProps extends HTMLMotionProps<"div"> {
   children: ReactNode;
   className?: string;
   hoverEffect?: boolean;
 }
 
-const GlassCard: React.FC<GlassCardProps> = ({ children, className = '', hoverEffect = false }) => {
+const GlassCard = React.forwardRef<HTMLDivElement, GlassCardProps>(({ children, className = '', hoverEffect = false, ...props }, ref) => {
   return (
     <motion.div
-      whileHover={hoverEffect ? { y: -10, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)" } : {}}
+      ref={ref}
+      whileHover={hoverEffect ? { y: -5, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)" } : {}}
       className={`
         relative overflow-hidden
         bg-white/5 
@@ -22,6 +22,7 @@ const GlassCard: React.FC<GlassCardProps> = ({ children, className = '', hoverEf
         rounded-2xl
         ${className}
       `}
+      {...props}
     >
       {/* Subtle sheen gradient overlay */}
       <div className="absolute inset-0 bg-linear-to-br from-white/5 to-transparent pointer-events-none" />
@@ -32,6 +33,8 @@ const GlassCard: React.FC<GlassCardProps> = ({ children, className = '', hoverEf
       </div>
     </motion.div>
   );
-};
+});
+
+GlassCard.displayName = 'GlassCard';
 
 export default GlassCard;

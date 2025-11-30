@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import GlassCard from '../ui/GlassCard'
+import GlassCard from '../ui/GlassCard';
 import { Code, Palette} from 'lucide-react';
 
 const About: React.FC<{ id: string }> = ({ id }) => {

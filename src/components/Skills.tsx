@@ -1,86 +1,138 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import GlassCard from '../ui/GlassCard';
-import { Database, Layout, Server, Smartphone, Terminal, Cpu } from 'lucide-react';
+import Magnetic from '../ui/Magnetic';
+import { Server, Layout, Terminal, Code2, Cpu } from 'lucide-react';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Skills: React.FC<{ id: string }> = ({ id }) => {
-  const technicalSkills = [
-    { name: "Frontend Development", icon: <Layout />, items: ["React", "Bootstrap", "Tailwind CSS","javaScript"] },
-    { name: "Backend Development", icon: <Server />, items: ["Node.js", "Express", "MongoDB"] },
-    { name: "Languages", icon: <Server />, items: ["Java", "python", "HTML","c++"] },
-    // { name: "Mobile & Tools", icon: <Smartphone />, items: ["React Native", "Git", "Docker", "AWS", "Figma"] },
+  const sectionRef = useRef<HTMLElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const skills = [
+    { 
+      title: "Frontend", 
+      icon: <Layout className="text-cyan-400" />, 
+      tech: ["React", "TypeScript", "Tailwind", "Next.js", "Framer Motion", "GSAP"] 
+    },
+    { 
+      title: "Backend", 
+      icon: <Server className="text-purple-400" />, 
+      tech: ["Node.js", "Express", "MongoDB", "PostgreSQL", "REST APIs", "GraphQL"] 
+    },
+    { 
+      title: "Languages", 
+      icon: <Code2 className="text-green-400" />, 
+      tech: ["JavaScript", "TypeScript", "Python", "Java", "C++", "HTML/CSS"] 
+    },
+    { 
+      title: "Tools & DevOps", 
+      icon: <Terminal className="text-orange-400" />, 
+      tech: ["Git", "Docker", "AWS", "Linux", "CI/CD", "Vercel"] 
+    },
+     { 
+      title: "AI & Data", 
+      icon: <Cpu className="text-pink-400" />, 
+      tech: ["LangChain", "OpenAI API", "Hugging Face", "Pandas", "NumPy"] 
+    }
   ];
 
+  useEffect(() => {
+    const section = sectionRef.current;
+    const track = trackRef.current;
+
+    if (!section || !track) return;
+
+    const ctx = gsap.context(() => {
+      const getScrollAmount = () => {
+        const trackWidth = track.scrollWidth;
+        const sectionWidth = window.innerWidth;
+        return -(trackWidth - sectionWidth);
+      };
+
+      const tween = gsap.to(track, {
+        x: getScrollAmount,
+        ease: "none",
+        scrollTrigger: {
+          trigger: section,
+          start: "top top",
+          end: () => `+=${Math.abs(getScrollAmount())}`, // Scroll distance equals horizontal translation distance
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        }
+      });
+    }, section);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id={id} className="py-20 relative">
-      <div className="container mx-auto px-6">
+    <section id={id} ref={sectionRef} className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+      <div className="container mx-auto px-6 mb-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Skills & Expertise</h2>
-          <div className="h-1 w-20 bg-linear-to-r from-cyan-400 to-purple-500 mx-auto rounded-full" />
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Technical Arsenal</h2>
+          <div className="h-1 w-24 bg-linear-to-r from-cyan-400 to-purple-500 mx-auto rounded-full" />
         </motion.div>
+      </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {technicalSkills.map((category, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.2 }}
-            >
-              <GlassCard className="h-full p-8 relative overflow-hidden group">
-                {/* Background Decoration */}
-                <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity transform group-hover:scale-110 duration-500">
-                  {React.cloneElement(category.icon as React.ReactElement<any>, { size: 100 })}
-                </div>
+      <div className="w-full">
+        {/* 
+            Padding Logic for Centering:
+            Mobile Card: 340px / 2 = 170px. Padding = 50vw - 170px
+            Desktop Card: 400px / 2 = 200px. Padding = 50vw - 200px
+            This places the center of the first/last card exactly at the center of the viewport (50vw) 
+            when at the start/end of the flex container.
+        */}
+        <div 
+          ref={trackRef}
+          className="flex gap-8 w-max pl-[calc(50vw-170px)] pr-[calc(50vw-170px)] md:pl-[calc(50vw-200px)] md:pr-[calc(50vw-200px)]"
+        >
+           {skills.map((skill, idx) => (
+             <div key={idx} className="w-[340px] md:w-[400px] flex-shrink-0">
+                <GlassCard className="p-8 h-full min-h-[460px] flex flex-col" hoverEffect={false}>
+                    <div className="flex items-center gap-4 mb-8">
+                      <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-xl shadow-cyan-900/10">
+                          {React.cloneElement(skill.icon as React.ReactElement<any>, { size: 28 })}
+                      </div>
+                      <h3 className="text-2xl font-bold text-white">{skill.title}</h3>
+                    </div>
+                    
+                    <div className="flex flex-wrap gap-3 content-start">
+                        {skill.tech.map((item, i) => (
+                          <Magnetic key={i}>
+                            <GlassCard 
+                              className="px-4 py-2.5 bg-white/5 border-white/5 hover:bg-white/10 cursor-pointer" 
+                              hoverEffect={false}
+                            >
+                                <span className="text-slate-300 text-sm font-medium">{item}</span>
+                            </GlassCard>
+                          </Magnetic>
+                        ))}
+                    </div>
 
-                <div className="flex items-center gap-4 mb-6 relative z-10">
-                  <div className="p-3 rounded-lg bg-linear-to-br from-cyan-500/20 to-purple-500/20 border border-white/10 text-cyan-400">
-                    {category.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-white">{category.name}</h3>
-                </div>
-
-                <div className="space-y-4 relative z-10">
-                  {category.items.map((skill, sIdx) => (
-                    <div key={sIdx} className="space-y-2">
-                        <div className="flex justify-between text-sm">
-                            <span className="text-slate-300">{skill}</span>
-                            <span className="text-slate-500">{(90 - sIdx * 5)}%</span>
-                        </div>
-                        <div className="h-1.5 w-full bg-slate-700/50 rounded-full overflow-hidden">
+                      <div className="mt-auto pt-8 opacity-50">
+                        <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
                             <motion.div 
                                 initial={{ width: 0 }}
-                                whileInView={{ width: `${90 - sIdx * 5}%` }}
-                                transition={{ duration: 1, delay: 0.5 + (sIdx * 0.1) }}
-                                className="h-full bg-linear-to-r from-cyan-400 to-purple-500 rounded-full"
+                                whileInView={{ width: "100%" }}
+                                transition={{ duration: 1.5, ease: "circOut", delay: 0.2 }}
+                                className="h-full bg-linear-to-r from-cyan-500 to-purple-600"
                             />
                         </div>
-                    </div>
-                  ))}
-                </div>
-              </GlassCard>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Additional "Soft Skills" or "Tools" Marquee or Grid could go here */}
-        <div className="mt-16 flex flex-wrap justify-center gap-8 opacity-60">
-             {[<Terminal key="1"/>, <Database key="2"/>, <Cpu key="3"/>].map((icon, i) => (
-                 <motion.div 
-                    key={i}
-                    animate={{ y: [0, -10, 0] }}
-                    transition={{ duration: 3, delay: i, repeat: Infinity }}
-                    className="p-4 rounded-full bg-white/5"
-                 >
-                     {React.cloneElement(icon as React.ReactElement<any>, { size: 32, className: "text-white" })}
-                 </motion.div>
-             ))}
+                      </div>
+                </GlassCard>
+             </div>
+           ))}
         </div>
       </div>
     </section>

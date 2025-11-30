@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import GlassCard from '../ui/GlassCard';
 import type { Project } from '../types';
 import { ExternalLink, Github } from 'lucide-react';
+import Magnetic from '../ui/Magnetic';
 
 const projectsData: Project[] = [
   {
@@ -73,16 +74,17 @@ const Projects: React.FC<{ id: string }> = ({ id }) => {
           {/* Category Filter */}
           <div className="flex flex-wrap justify-center gap-3">
             {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === cat
-                  ? 'bg-linear-to-r from-cyan-500 to-purple-600 text-white shadow-lg shadow-purple-500/25'
-                  : 'bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white border border-white/5'
-                  }`}
-              >
-                {cat}
-              </button>
+              <Magnetic key={cat}>
+                <button
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === cat
+                    ? 'bg-linear-to-r from-cyan-500 to-purple-600 text-white shadow-lg shadow-purple-500/25'
+                    : 'bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white border border-white/5'
+                    }`}
+                >
+                  {cat}
+                </button>
+              </Magnetic>
             ))}
           </div>
         </motion.div>
