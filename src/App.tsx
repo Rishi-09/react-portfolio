@@ -6,13 +6,14 @@ import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Cursor from './ui/Cursor';
+import SmoothScroll from './ui/SmoothScroll';
 import Experience from './components/Experience';
 import Achievements from './components/Achievements';
 import Footer from './components/Footer';
 
 function App() {
   return (
-    <div>
+    <SmoothScroll>
       <div className="relative min-h-screen text-slate-200 selection:bg-cyan-500/30">
         <Cursor />
         
@@ -34,8 +35,7 @@ function App() {
         </main>
       </div>
       <Footer />
-      </div>
-
+    </SmoothScroll>
   );
 }
 
