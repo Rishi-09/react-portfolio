@@ -101,9 +101,7 @@ const Hero: React.FC<{ id: string }> = ({ id }) => {
           className="order-1 md:order-2 flex justify-center relative"
         >
             <div className="relative w-72 h-72 md:w-96 md:h-96 hover:scale-105 transition-transform duration-500 ease-out">
-                {/* Decorative Circles behind image */}
-                <div className="absolute inset-0 rounded-full border border-white/10 animate-[spin_10s_linear_infinite]" />
-                <div className="absolute inset-4 rounded-full border border-white/5 animate-[spin_15s_linear_infinite_reverse]" />
+                
                 
                 {/* Profile / Abstract Image */}
                 <div className="absolute inset-8 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl bg-slate-900">

@@ -13,7 +13,7 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <SmoothScroll>
+    <div>
       <div className="relative min-h-screen text-slate-200 selection:bg-cyan-500/30">
         <Cursor />
         
@@ -35,7 +35,8 @@ function App() {
         </main>
       </div>
       <Footer />
-    </SmoothScroll>
+      </div>
+
   );
 }
 
