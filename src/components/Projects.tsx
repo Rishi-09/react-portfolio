@@ -49,7 +49,7 @@ const projectsData: Project[] = [
     image: portfolio,
     tech: ["Google Ai Studio", "typeScript", "react"],
     github:"https://github.com/rishi-09/roomora",
-    externalLink:"#"
+    externalLink:"https://react-portfolio-ft9t.vercel.app/"
   },
 
 ];
