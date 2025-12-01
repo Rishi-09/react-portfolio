@@ -48,7 +48,7 @@ const projectsData: Project[] = [
     description: "My porfolio website",
     image: portfolio,
     tech: ["Google Ai Studio", "typeScript", "react"],
-    github:"https://github.com/rishi-09/roomora",
+    github:"https://github.com/rishi-09/react-portfolio",
     externalLink:"https://react-portfolio-ft9t.vercel.app/"
   },
 
