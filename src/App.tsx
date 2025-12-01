@@ -7,6 +7,9 @@ import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Cursor from './ui/Cursor';
 import SmoothScroll from './ui/SmoothScroll';
+import Experience from './components/Experience';
+import Achievements from './components/Achievements';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -26,9 +29,12 @@ function App() {
           <About id="about" />
           <Projects id="projects" />
           <Skills id="skills" />
+          <Experience id="experience" />
+          <Achievements id="achievements"/>
           <Contact id="contact" />
         </main>
       </div>
+      <Footer />
     </SmoothScroll>
   );
 }
