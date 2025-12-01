@@ -99,7 +99,7 @@ const Navbar: React.FC = () => {
         {/* Logo */}
         <Magnetic>
             <a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }} className="text-xl md:text-2xl font-bold text-amber-50 cursor-pointer">
-            Rishi.
+            Rishi's Portfolio
             </a>
         </Magnetic>
 
@@ -110,7 +110,7 @@ const Navbar: React.FC = () => {
                 <button
                 onClick={() => scrollToSection(item.id)}
                 className={`relative px-3 py-2 text-xs lg:text-sm font-medium transition-colors hover:text-white ${
-                    activeSection === item.id ? 'text-white' : 'text-slate-400'
+                    activeSection === item.id ? 'text-white' : 'text-slate-200'
                 }`}
                 >
                 {item.label}
