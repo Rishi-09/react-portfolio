@@ -67,7 +67,7 @@ const Skills: React.FC<{ id: string }> = ({ id }) => {
       };
 
       gsap.to(track, {
-        x: getScrollAmount,
+        x: getScrollAmount(),
         ease: "none",
         scrollTrigger: {
           trigger: section,

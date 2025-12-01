@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import GlassCard from '../ui/GlassCard';
-import { Calendar, Users } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import gdgIcon from '../assets/idUP-XWcuo_logos.jpeg'
 
 const Experience: React.FC<{ id: string }> = ({ id }) => {
