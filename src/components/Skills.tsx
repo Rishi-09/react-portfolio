@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import GlassCard from '../ui/GlassCard';
 import Magnetic from '../ui/Magnetic';
-import { Server, Layout, Terminal, Code2, Cpu } from 'lucide-react';
+import { Server, Layout, Terminal, Code2 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,28 +16,24 @@ const Skills: React.FC<{ id: string }> = ({ id }) => {
     { 
       title: "Frontend", 
       icon: <Layout className="text-cyan-400" />, 
-      tech: ["React", "TypeScript", "Tailwind", "Next.js", "Framer Motion", "GSAP"] 
+      tech: ["React", "Tailwind","Material Ui","BootStrap"] 
     },
     { 
       title: "Backend", 
       icon: <Server className="text-purple-400" />, 
-      tech: ["Node.js", "Express", "MongoDB", "PostgreSQL", "REST APIs", "GraphQL"] 
+      tech: ["Node.js", "Express", "MongoDB", "MySQL", "REST APIs"] 
     },
     { 
       title: "Languages", 
       icon: <Code2 className="text-green-400" />, 
-      tech: ["JavaScript", "TypeScript", "Python", "Java", "C++", "HTML/CSS"] 
+      tech: ["JavaScript", "Python", "Java", "C++", "HTML/CSS"] 
     },
     { 
-      title: "Tools & DevOps", 
+      title: "Tools", 
       icon: <Terminal className="text-orange-400" />, 
-      tech: ["Git", "Docker", "AWS", "Linux", "CI/CD", "Vercel"] 
+      tech: ["Git","Github", "Vercel","Render"] 
     },
-     { 
-      title: "AI & Data", 
-      icon: <Cpu className="text-pink-400" />, 
-      tech: ["LangChain", "OpenAI API", "Hugging Face", "Pandas", "NumPy"] 
-    }
+     
   ];
 
   useEffect(() => {
@@ -98,7 +94,7 @@ const Skills: React.FC<{ id: string }> = ({ id }) => {
           className="flex gap-8 w-max pl-[calc(50vw-170px)] pr-[calc(50vw-170px)] md:pl-[calc(50vw-200px)] md:pr-[calc(50vw-200px)]"
         >
            {skills.map((skill, idx) => (
-             <div key={idx} className="w-[340px] md:w-[400px] flex-shrink-0">
+             <div key={idx} className="w-[340px] md:w-[400px] shrink-0">
                 <GlassCard className="p-8 h-full min-h-[460px] flex flex-col" hoverEffect={false}>
                     <div className="flex items-center gap-4 mb-8">
                       <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center shadow-xl shadow-cyan-900/10">

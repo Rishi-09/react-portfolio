@@ -9,6 +9,8 @@ const navItems: NavItem[] = [
   { id: 'about', label: 'About' },
   { id: 'projects', label: 'Projects' },
   { id: 'skills', label: 'Skills' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'achievements', label: 'Achievements' },
   { id: 'contact', label: 'Contact' },
 ];
 
@@ -22,22 +24,41 @@ const Navbar: React.FC = () => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      // Simple scroll spy
-      const sections = navItems.map(item => document.getElementById(item.id));
-      const scrollPosition = window.scrollY + 100; // Offset
+      // Check if we are at the bottom of the page
+      if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 50) {
+        setActiveSection('contact');
+        return;
+      }
 
-      for (const section of sections) {
-        if (section) {
-          const top = section.offsetTop;
-          const height = section.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(section.id);
+      // Advanced Scroll Spy
+      // We look for the section that occupies the 30% line of the viewport
+      const triggerPoint = window.innerHeight * 0.3; 
+      let current = '';
+      
+      for (const item of navItems) {
+        const element = document.getElementById(item.id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          // Check if the section overlaps with the trigger point
+          if (rect.top <= triggerPoint && rect.bottom > triggerPoint) {
+            current = item.id;
           }
         }
+      }
+
+      // Fallback: If close to top, force Home
+      if (window.scrollY < 100) {
+        current = 'home';
+      }
+
+      if (current) {
+        setActiveSection(current);
       }
     };
 
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
+    
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -45,8 +66,13 @@ const Navbar: React.FC = () => {
     setMobileMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
+      // Calculate position relative to the document
+      const offset = 80; // Navbar height buffer
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - offset;
+
       window.scrollTo({
-        top: element.offsetTop,
+        top: offsetPosition,
         behavior: 'smooth',
       });
     }
@@ -72,18 +98,18 @@ const Navbar: React.FC = () => {
       >
         {/* Logo */}
         <Magnetic>
-            <a href="#home" className="text-xl md:text-2xl font-bold text-amber-50">
+            <a href="#home" onClick={(e) => { e.preventDefault(); scrollToSection('home'); }} className="text-xl md:text-2xl font-bold text-amber-50 cursor-pointer">
             Rishi.
             </a>
         </Magnetic>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-2 items-center">
+        <div className="hidden md:flex space-x-1 lg:space-x-2 items-center">
           {navItems.map((item) => (
             <Magnetic key={item.id}>
                 <button
                 onClick={() => scrollToSection(item.id)}
-                className={`relative px-4 py-2 text-sm font-medium transition-colors hover:text-white ${
+                className={`relative px-3 py-2 text-xs lg:text-sm font-medium transition-colors hover:text-white ${
                     activeSection === item.id ? 'text-white' : 'text-slate-400'
                 }`}
                 >
@@ -130,7 +156,7 @@ const Navbar: React.FC = () => {
             className={`
               absolute top-full left-0 right-0 z-40
               ${scrolled ? 'mt-2 w-[95%] mx-auto rounded-2xl' : 'mt-0 w-full'}
-              backdrop-blur-xl border border-white/10 overflow-hidden shadow-2xl bg-amber-50/10
+              backdrop-blur-lg border border-white/10 overflow-hidden shadow-2xl bg-amber-950/10
             `}
           >
             <div className="flex flex-col p-6 space-y-4">

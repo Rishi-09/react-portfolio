@@ -1,17 +1,20 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import GlassCard from '../ui/GlassCard';
-import { Code, Palette} from 'lucide-react';
+import { GraduationCap, BookOpen, Terminal ,Code } from 'lucide-react';
 
 const About: React.FC<{ id: string }> = ({ id }) => {
-  const stats = [
-    { label: 'Years Experience', value: 'Fresher' },
-    { label: 'Projects Completed', value: '3' },
+  const education = [
+    { label: 'Degree', value: 'B.Tech CSE' },
+    { label: 'Current CGPA', value: '8.2' },
+    { label: 'Semester', value: '3rd' },
   ];
 
   const features = [
+    { icon: <GraduationCap size={24} />, title: "Education", desc: "Pursuing Computer Science & Engineering with focus on AI & Backend ." },
+    { icon: <Terminal size={24} />, title: "Problem Solving", desc: "Continuously Solving DSA problems." },
+    { icon: <BookOpen size={24} />, title: "Exploring", desc: "Exploring Artificial Intelligence and their application in real life" },
     { icon: <Code size={24} />, title: "Clean Code", desc: "Maintainable, scalable, and efficient architecture." },
-    { icon: <Palette size={24} />, title: "Ai Enthusiast", desc: "Wish to explore and dive deeper Into field of Ai" },
   ];
 
   return (
@@ -28,7 +31,7 @@ const About: React.FC<{ id: string }> = ({ id }) => {
           <div className="h-1 w-20 bg-linear-to-r from-cyan-400 to-purple-500 mx-auto rounded-full" />
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Bio Side */}
           <motion.div
              initial={{ opacity: 0, x: -30 }}
@@ -37,20 +40,20 @@ const About: React.FC<{ id: string }> = ({ id }) => {
              transition={{ duration: 0.6 }}
           >
             <h3 className="text-2xl font-bold text-white mb-6">
-              Turning complex problems into <span className="text-cyan-400">simple, beautiful solutions.</span>
+              Engineering <span className="text-cyan-400">robust backends</span> & exploring <span className="text-purple-400">AI frontiers.</span>
             </h3>
             <p className="text-slate-300 leading-relaxed mb-6">
-              I am a passionate Full Stack Developer with a keen eye for design. I bridge the gap between engineering and creativity, ensuring every product isn't just functional but also delightful to use.
+              I am an undergraduate Computer Science student in <span className='text-cyan-400 font-bold' >Mahatma Gandhi Mission's College of Engineerin and Technology , Noida.</span>  My academic journey is defined by a consistent curiosity to understand how things work under the hood.
             </p>
             <p className="text-slate-300 leading-relaxed mb-8">
-              My journey began in graphic design, which naturally evolved into frontend development. This background allows me to understand both the aesthetic and technical requirements of a project deeply.
+              Currently, I am focusing on mastering Data Structures and Algorithms while building scalable web applications. I actively participate in coding contests and contribute to the technical society at my college.
             </p>
 
             <div className="flex gap-8 mb-8">
-              {stats.map((stat, idx) => (
+              {education.map((item, idx) => (
                 <div key={idx}>
-                  <h4 className="text-3xl font-bold text-white mb-1">{stat.value}</h4>
-                  <p className="text-sm text-slate-400">{stat.label}</p>
+                  <h4 className="text-2xl md:text-3xl font-bold text-white mb-1">{item.value}</h4>
+                  <p className="text-sm text-slate-400">{item.label}</p>
                 </div>
               ))}
             </div>
@@ -82,4 +85,5 @@ const About: React.FC<{ id: string }> = ({ id }) => {
   );
 };
 
-export default About;
+export default About;	
+

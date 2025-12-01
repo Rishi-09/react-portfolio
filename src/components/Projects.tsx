@@ -4,6 +4,10 @@ import GlassCard from '../ui/GlassCard';
 import type { Project } from '../types';
 import { ExternalLink, Github } from 'lucide-react';
 import Magnetic from '../ui/Magnetic';
+import roomora from '../assets/roomora.png';
+import portfolio from '../assets/portfolio.png';
+import game from '../assets/ssg.png';
+import syranx from '../assets/chatbot.png';
 
 const projectsData: Project[] = [
   {
@@ -11,18 +15,18 @@ const projectsData: Project[] = [
     title: "roomora",
     category: "Web App",
     description: "A web-based platform to streamline the management and monitoring of bookings, occupancy, and resources for travel and vacation planning.",
-    image: "https://picsum.photos/id/2/800/600",
+    image: roomora,
     tech: ["node.js", "express.js", "MongoDB", "Bootstrap"],
     github:"https://github.com/rishi-09/roomora",
-    externalLink:"roomora-sm0v.onrender.com"
+    externalLink:"https://roomora-sm0v.onrender.com"
   },
 
   {
     id: 2,
     title: "AI ChatBot",
     category: "AI Tool",
-    description: "A ai chabot wokring on dynamic ai models.",
-    image: "https://picsum.photos/id/26/800/600",
+    description: "A ai chabot wokring on dynamic ai models.currently not deployed so please visit github",
+    image: syranx,
     tech: ["React", "Groq API", "node.js", "Gemini API"],
     github:"https://github.com/rishi-09/syranx",
     externalLink:"#"
@@ -32,17 +36,17 @@ const projectsData: Project[] = [
     title: "Simon Says",
     category: "Game",
     description: "A memory bossting game",
-    image: "https://picsum.photos/id/60/800/600",
+    image: game,
     tech: ["HTML", "CSS", "JS"],
     github:"https://github.com/rishi-09/simon_says_game",
-    externalLink:"simon-says-game-khaki-two.vercel.app"
+    externalLink:"https://simon-says-game-khaki-two.vercel.app"
   },
   {
     id: 4,
     title: "Portfolio Website",
     category: "Web App",
     description: "My porfolio website",
-    image: "https://picsum.photos/id/60/800/600",
+    image: portfolio,
     tech: ["Google Ai Studio", "typeScript", "react"],
     github:"https://github.com/rishi-09/roomora",
     externalLink:"#"
@@ -78,7 +82,7 @@ const Projects: React.FC<{ id: string }> = ({ id }) => {
                 <button
                   onClick={() => setActiveCategory(cat)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === cat
-                    ? 'bg-linear-to-r from-cyan-500 to-purple-600 text-white shadow-lg shadow-purple-500/25'
+                    ? 'bg-amber-50/30 text-white shadow-lg shadow-purple-500/25'
                     : 'bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white border border-white/5'
                     }`}
                 >

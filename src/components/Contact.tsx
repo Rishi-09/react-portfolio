@@ -34,13 +34,15 @@ const Contact: React.FC<{ id: string }> = ({ id }) => {
             >
                 <Magnetic>
                     <a href="mailto:rishikm1215@gmail.com" className="block group">
-                        <GlassCard className="p-8 h-full flex flex-col items-center justify-center text-center hover:bg-white/10 transition-colors" hoverEffect={true}>
-                            <div className="w-16 h-16 rounded-full bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform duration-500">
+                        <GlassCard className="p-8 h-full flex flex-col  hover:bg-white/10 transition-colors" hoverEffect={true}>
+                            <div className='flex justify-center' >
+                                <div className="w-16 h-16 rounded-full bg-cyan-500/10 flex flex-col items-center justify-center text-cyan-400 mb-6 group-hover:scale-110 transition-transform duration-500">
                                 <Mail size={32} />
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-2">Email Me</h3>
+                            </div>
+                            <h3 className="text-2xl text-center font-bold text-white mb-2">Email Me</h3>
                             <p className="text-slate-400 mb-6">rishikm1215@gmail.com</p>
-                            <span className="inline-flex items-center gap-2 text-cyan-400 font-medium group-hover:gap-4 transition-all">
+                            <span className="inline-flex  items-center gap-2 text-cyan-400 font-medium group-hover:gap-4 transition-all">
                                 Say Hello <ArrowUpRight size={18} />
                             </span>
                         </GlassCard>
@@ -86,10 +88,6 @@ const Contact: React.FC<{ id: string }> = ({ id }) => {
                  </div>
             </motion.div>
         </div>
-
-        <footer className="mt-32 text-center border-t border-white/5 pt-8">
-            <p className="text-slate-500">© {new Date().getFullYear()} Rishi. Crafted with <span className="text-red-500">♥</span> and React.</p>
-        </footer>
       </div>
     </section>
   );

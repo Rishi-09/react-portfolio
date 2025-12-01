@@ -1,11 +1,23 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
 import TextReveal from '../ui/TextReveal';
 import Magnetic from '../ui/Magnetic';
 import Typewriter from '../ui/Typewriter';
+import photo from '../assets/photo.jpeg';
+import resume from '../assets/RishiKumar.pdf'
 
 const Hero: React.FC<{ id: string }> = ({ id }) => {
+
+  const downloadFile = (fileUrl: string): void => {
+  const link = document.createElement("a");
+  link.href = fileUrl;
+  link.download = fileUrl.split("/").pop() ?? "download";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
+
+
   return (
     <section id={id} className="min-h-screen flex items-center justify-center relative pt-20">
       <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
@@ -23,26 +35,25 @@ const Hero: React.FC<{ id: string }> = ({ id }) => {
             transition={{ delay: 0.2 }}
             className="inline-block px-3 py-1 mb-6 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-semibold tracking-wide"
           >
-            Hey, I am Rishi
+            hello,
           </motion.div>
           
           <div className="mb-6">
              <TextReveal 
-               text="Building digital" 
+               text="I am Rishi" 
                className="text-5xl md:text-7xl font-bold text-white leading-tight" 
                delay={0.3}
              />
              <div className="text-5xl md:text-7xl font-bold leading-tight text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-purple-500 to-pink-500">
-                <TextReveal text="liquid experiences" delay={0.6} />
+                <TextReveal text="liquid experiences" delay={0.9} />
              </div>
           </div>
           
           <div className="text-lg text-slate-300 mb-8 max-w-lg leading-relaxed h-16 md:h-20">
             <Typewriter 
               sentences={[
-                "I am a creative developer, specialized in backend.",
-                "I am seeking a career in Artificial Intelligence.",
-                "I am seeking opportunities."
+                "I am a creative full stack developer, specialized in backend.",
+                "I am exploring and diving into Artificial Intelligence and Machine Learning.",
               ]}
               typingSpeed={50}
               deletingSpeed={30}
@@ -55,23 +66,28 @@ const Hero: React.FC<{ id: string }> = ({ id }) => {
                 <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative px-8 py-3 rounded-full bg-white text-slate-900 font-semibold flex items-center gap-2 overflow-hidden"
+                className="group relative px-6 py-3 rounded-full bg-white text-slate-900 font-semibold flex items-center gap-2 overflow-hidden"
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth'})}
                 >
-                <span className="relative z-10">View Projects</span>
-                <ArrowRight size={18} className="relative z-10 transition-transform group-hover:translate-x-1" />
+                <div className='flex gap-2' >
+                  <span className="relative z-10">View Projects</span>
+                <ArrowRight size={18} className="relative z-10 top-0.5 transition-transform group-hover:translate-x-1" />
                 <div className="absolute inset-0 bg-linear-to-r from-cyan-300 to-cyan-100 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
                 </motion.button>
             </Magnetic>
             
             <Magnetic>
                 <motion.button
+                onClick={()=>downloadFile(resume)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-3 rounded-full bg-white/5 border border-white/10 text-white font-semibold flex items-center gap-2 hover:bg-white/10 transition-colors backdrop-blur-sm"
+                className="px-6 py-3 rounded-full bg-white/5 border border-white/10 text-white font-semibold flex items-center gap-2 hover:bg-white/10 transition-colors backdrop-blur-sm"
                 >
-                <span>Resume</span>
+                <div className='flex gap-2 ' >
+                  <span>Resume</span>
                 <Download size={18} />
+                </div>
                 </motion.button>
             </Magnetic>
           </div>
@@ -92,9 +108,9 @@ const Hero: React.FC<{ id: string }> = ({ id }) => {
                 {/* Profile / Abstract Image */}
                 <div className="absolute inset-8 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl bg-slate-900">
                     <img 
-                        src="https://picsum.photos/800/800?grayscale" 
+                        src={photo}
                         alt="Profile" 
-                        className="w-full h-full object-cover opacity-80 hover:scale-110 transition-transform duration-700"
+                        className="w-full h-full object-cover opacity-80 scale-440 translate-x-[-25px] translate-y-[-50px] rotate-2 hover:scale-300 hover:-translate-x-4 transition-transform duration-700"
                     />
                 </div>
                 
