@@ -2,8 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import GlassCard from  '../ui/GlassCard';
+import GlassCard from '../ui/GlassCard';
 import Magnetic from '../ui/Magnetic';
+import github from '../assets/github-original-wordmark.svg';
 import { Server, Layout, Terminal, Code2, Globe } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -12,13 +13,14 @@ const Skills: React.FC<{ id: string }> = ({ id }) => {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
-  const skills = [
+const skills = [
     { 
       title: "Frontend", 
       icon: <Layout className="text-cyan-400" />, 
       tech: [
         { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
         { name: "Tailwind", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+        { name: "HTML/CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" }
       ] 
     },
     { 
@@ -39,7 +41,7 @@ const Skills: React.FC<{ id: string }> = ({ id }) => {
         { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
         { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
         { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
-        { name: "HTML/CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" }
+        
       ] 
     },
     { 
@@ -47,6 +49,7 @@ const Skills: React.FC<{ id: string }> = ({ id }) => {
       icon: <Terminal className="text-orange-400" />, 
       tech: [
         { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+        { name: "GitHub", icon: github },
         { name: "Linux", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" },
         { name: "Vercel", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg", invert: true }
       ] 
@@ -67,14 +70,14 @@ const Skills: React.FC<{ id: string }> = ({ id }) => {
       };
 
       gsap.to(track, {
-        x: getScrollAmount(),
+        x: getScrollAmount,
         ease: "none",
         scrollTrigger: {
           trigger: section,
           start: "top top",
           end: () => `+=${Math.abs(getScrollAmount())}`, 
           pin: true,
-          scrub: 1,
+          scrub: 0, // Set to 0 to rely on Lenis for smoothing, preventing 'floaty' or 'laggy' feel
           anticipatePin: 1,
           invalidateOnRefresh: true,
         }
@@ -102,7 +105,7 @@ const Skills: React.FC<{ id: string }> = ({ id }) => {
         <div className="w-full">
           <div 
             ref={trackRef}
-            className="flex gap-8 w-max pl-[calc(50vw-170px)] pr-[calc(50vw-170px)] md:pl-[calc(50vw-200px)] md:pr-[calc(50vw-200px)]"
+            className="flex gap-8 w-max pl-[calc(50vw-170px)] pr-[calc(50vw-170px)] md:pl-[calc(50vw-200px)] md:pr-[calc(50vw-200px)] will-change-transform"
           >
             {skills.map((skill, idx) => (
               <div key={idx} className="w-[340px] md:w-[400px] shrink-0">

@@ -44,16 +44,15 @@ const Hero: React.FC<{ id: string }> = ({ id }) => {
                className="text-5xl md:text-7xl font-bold text-white leading-tight" 
                delay={0.3}
              />
-             <div className="text-5xl md:text-7xl font-bold leading-tight text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-purple-500 to-pink-500">
-                <TextReveal text="liquid experiences" delay={0.9} />
-             </div>
+             
           </div>
           
           <div className="text-lg text-slate-300 mb-8 max-w-lg leading-relaxed h-16 md:h-20">
             <Typewriter 
               sentences={[
-                "I am a creative full stack developer, specialized in backend.",
-                "I am exploring and diving into Artificial Intelligence and Machine Learning.",
+                "I am a creative full stack developer.",
+                "I am  specialized in backend.",
+                "I am exploring and diving into AI/ML.",
               ]}
               typingSpeed={50}
               deletingSpeed={30}
@@ -69,7 +68,7 @@ const Hero: React.FC<{ id: string }> = ({ id }) => {
                 className="group relative px-6 py-3 rounded-full bg-white text-slate-900 font-semibold flex items-center gap-2 overflow-hidden"
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth'})}
                 >
-                <div className='flex gap-2' >
+                <div className='flex gap-2 z-9999 ' >
                   <span className="relative z-10">View Projects</span>
                 <ArrowRight size={18} className="relative z-10 top-0.5 transition-transform group-hover:translate-x-1" />
                 <div className="absolute inset-0 bg-linear-to-r from-cyan-300 to-cyan-100 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -132,10 +131,10 @@ const Hero: React.FC<{ id: string }> = ({ id }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: [0, 10, 0] }}
         transition={{ delay: 1, duration: 2, repeat: Infinity }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-slate-500"
+        className="absolute -bottom-4 left-1/2 -translate-x-1/2 text-slate-200"
       >
         <span className="text-xs uppercase tracking-widest mb-2 block text-center">Scroll</span>
-        <div className="w-px h-12 bg-linear-to-b from-slate-500 to-transparent mx-auto"></div>
+        <div className="w-px h-12 bg-linear-to-b from-slate-200 to-transparent mx-auto"></div>
       </motion.div>
     </section>
   );

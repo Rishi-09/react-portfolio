@@ -15,7 +15,7 @@ const Achievements: React.FC<{ id: string }> = ({ id }) => {
       title: "3x Hacktathon Finalist",
       description: "TechJam 2.0 at Microsoft , Hack-a-pirates NSUT Delhi, HackVriksh (online)",
       icon: <Target size={24} className="text-cyan-400" />,
-      date: "2024"
+      date: "2025"
     }
   ];
 

@@ -5,7 +5,6 @@ import type { Project } from '../types';
 import { ExternalLink, Github } from 'lucide-react';
 import Magnetic from '../ui/Magnetic';
 import roomora from '../assets/roomora.png';
-import portfolio from '../assets/portfolio.png';
 import game from '../assets/ssg.png';
 import syranx from '../assets/chatbot.png';
 
@@ -41,16 +40,6 @@ const projectsData: Project[] = [
     github:"https://github.com/rishi-09/simon_says_game",
     externalLink:"https://simon-says-game-khaki-two.vercel.app"
   },
-  {
-    id: 4,
-    title: "Portfolio Website",
-    category: "Web App",
-    description: "My porfolio website",
-    image: portfolio,
-    tech: ["Google Ai Studio", "typeScript", "react"],
-    github:"https://github.com/rishi-09/react-portfolio",
-    externalLink:"https://react-portfolio-ft9t.vercel.app/"
-  },
 
 ];
 
@@ -82,8 +71,8 @@ const Projects: React.FC<{ id: string }> = ({ id }) => {
                 <button
                   onClick={() => setActiveCategory(cat)}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === cat
-                    ? 'bg-amber-50/30 text-white shadow-lg shadow-purple-500/25'
-                    : 'bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white border border-white/5'
+                    ? 'bg-amber-50/30 text-indigo-800 shadow-lg shadow-purple-500/25'
+                    : 'bg-white/5 text-slate-100 hover:bg-white/10 hover:text-white border border-white/5'
                     }`}
                 >
                   {cat}
@@ -128,11 +117,11 @@ const Projects: React.FC<{ id: string }> = ({ id }) => {
                   <div className="p-6">
                     <span className="text-xs font-semibold text-cyan-400 uppercase tracking-wider">{project.category}</span>
                     <h3 className="text-xl font-bold text-white mt-2 mb-3">{project.title}</h3>
-                    <p className="text-slate-400 text-sm mb-4 line-clamp-3">{project.description}</p>
+                    <p className="text-slate-300 text-sm mb-4 line-clamp-3">{project.description}</p>
 
                     <div className="flex flex-wrap gap-2 mt-auto">
                       {project.tech.map((t, i) => (
-                        <span key={i} className="text-xs px-2 py-1 rounded bg-white/5 border border-white/10 text-slate-300">
+                        <span key={i} className="text-xs px-2 py-1 rounded bg-white/5 border border-white/10 text-slate-100">
                           {t}
                         </span>
                       ))}

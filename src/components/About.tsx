@@ -74,7 +74,7 @@ const About: React.FC<{ id: string }> = ({ id }) => {
                     {feature.icon}
                   </div>
                   <h4 className="text-lg font-bold text-white mb-2">{feature.title}</h4>
-                  <p className="text-sm text-slate-300">{feature.desc}</p>
+                  <p className="text-sm text-slate-200">{feature.desc}</p>
                 </GlassCard>
               </motion.div>
             ))}

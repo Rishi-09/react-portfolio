@@ -52,12 +52,12 @@ const Experience: React.FC<{ id: string }> = ({ id }) => {
                         <h3 className="text-xl font-bold text-white">{exp.role}</h3>
                         <p className="text-cyan-400 font-medium">{exp.org}</p>
                     </div>
-                    <div className="flex items-center gap-2 text-slate-400 text-sm bg-white/5 px-3 py-1 rounded-full w-fit">
+                    <div className="flex items-center gap-2 text-slate-200 text-sm bg-white/5 px-3 py-1 rounded-full w-fit">
                       <Calendar size={14} />
                       <span>{exp.date}</span>
                     </div>
                   </div>
-                  <p className="text-slate-300 leading-relaxed">
+                  <p className="text-slate-200 leading-relaxed">
                     {exp.desc}
                   </p>
                 </div>

@@ -18,7 +18,7 @@ const Contact: React.FC<{ id: string }> = ({ id }) => {
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-8">
             Let's work <br /> <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-purple-500">together.</span>
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-slate-200 text-lg max-w-2xl mx-auto">
             I'm currently looking for new opportunities. Whether you have a question or just want to say hi, my inbox is always open.
           </p>
         </motion.div>
