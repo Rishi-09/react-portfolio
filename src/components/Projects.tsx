@@ -28,7 +28,7 @@ const projectsData: Project[] = [
     image: syranx,
     tech: ["React", "Groq API", "node.js", "Gemini API"],
     github:"https://github.com/rishi-09/syranx",
-    externalLink:"#"
+    externalLink:"https://syranx.vercel.app"
   },
   {
     id: 3,

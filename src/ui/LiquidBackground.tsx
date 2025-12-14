@@ -29,7 +29,7 @@ const LiquidBackground: React.FC = () => {
       canvas.height = state.current.height;
 
       // Create Floating Orbs (The "Liquid")
-      const colors = ['#06b6d4', '#8b5cf6', '#3b82f6', '#ec4899']; // Cyan, Violet, Blue, Pink
+      const colors = ['#06b6d4', '#8b5cf6', '#3b82f6', '#e2e2e2']; // Cyan, Violet, Blue, Pink
       state.current.orbs = Array.from({ length: 5 }).map(() => ({
         x: Math.random() * state.current.width,
         y: Math.random() * state.current.height,
