@@ -7,3 +7,5 @@ build/
 *.cache
 .eslintcache
 vite.config.ts.timestamp-*
+dist/
+*.tsbuildinfo

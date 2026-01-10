@@ -1,140 +1,322 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import GlassCard from '../ui/GlassCard';
-import type { Project } from '../types';
-import { ExternalLink, Github } from 'lucide-react';
-import Magnetic from '../ui/Magnetic';
-import roomora from '../assets/roomora.png';
-import game from '../assets/ssg.png';
-import syranx from '../assets/chatbot.png';
+import { Github, ExternalLink } from 'lucide-react';
+import { PROJECTS } from '../constants';
+import { type Project } from '../types';
 
-const projectsData: Project[] = [
-  {
-    id: 1,
-    title: "roomora",
-    category: "Web App",
-    description: "A web-based platform to streamline the management and monitoring of bookings, occupancy, and resources for travel and vacation planning.",
-    image: roomora,
-    tech: ["node.js", "express.js", "MongoDB", "Bootstrap"],
-    github:"https://github.com/rishi-09/roomora",
-    externalLink:"https://roomora-sm0v.onrender.com"
-  },
+const FILTERS = ['All', 'Web App', 'AI', 'Game'];
 
-  {
-    id: 2,
-    title: "AI ChatBot",
-    category: "AI Tool",
-    description: "A ai chabot wokring on dynamic ai models.currently not deployed so please visit github",
-    image: syranx,
-    tech: ["React", "Groq API", "node.js", "Gemini API"],
-    github:"https://github.com/rishi-09/syranx",
-    externalLink:"https://syranx.vercel.app"
-  },
-  {
-    id: 3,
-    title: "Simon Says",
-    category: "Game",
-    description: "A memory bossting game",
-    image: game,
-    tech: ["HTML", "CSS", "JS"],
-    github:"https://github.com/rishi-09/simon_says_game",
-    externalLink:"https://simon-says-game-khaki-two.vercel.app"
-  },
+interface ProjectCardProps {
+  project: Project;
+}
 
-];
+const ProjectCard: React.FC<ProjectCardProps> = React.memo(({ project }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
-const categories = ["All", "Web App", "AI Tool", "Game"];
-
-const Projects: React.FC<{ id: string }> = ({ id }) => {
-  const [activeCategory, setActiveCategory] = useState("All");
-
-  const filteredProjects = activeCategory === "All"
-    ? projectsData
-    : projectsData.filter(p => p.category === activeCategory);
+  function handleMouseMove(e: React.MouseEvent) {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    
+    cardRef.current.style.setProperty('--mouse-x', `${x}%`);
+    cardRef.current.style.setProperty('--mouse-y', `${y}%`);
+  }
 
   return (
-    <section id={id} className="py-20 relative">
-      <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Featured Projects</h2>
-          <div className="h-1 w-20 bg-linear-to-r from-cyan-400 to-purple-500 mx-auto rounded-full mb-8" />
+    <motion.div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="project-card group relative flex flex-col rounded-[2rem] border border-[var(--border-color)] bg-[var(--surface-color)]/30 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.4)] h-full"
+      style={{
+        willChange: isHovered ? 'border-color, box-shadow' : 'auto'
+      }}
+    >
+      {/* Dynamic Spotlight Effect */}
+      <div className="project-spotlight pointer-events-none absolute -inset-px rounded-[2rem] z-0" />
 
-          {/* Category Filter */}
-          <div className="flex flex-wrap justify-center gap-3">
-            {categories.map((cat) => (
-              <Magnetic key={cat}>
-                <button
-                  onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${activeCategory === cat
-                    ? 'bg-amber-50/30 text-indigo-800 shadow-lg shadow-purple-500/25'
-                    : 'bg-white/5 text-slate-100 hover:bg-white/10 hover:text-white border border-white/5'
-                    }`}
-                >
-                  {cat}
-                </button>
-              </Magnetic>
+      {/* Image Container */}
+      <div className="relative aspect-[16/10] overflow-hidden m-4 rounded-[1.5rem] bg-[var(--bg-color)] shadow-inner">
+        <img 
+          src={project.imageUrl} 
+          alt={project.title}
+          loading="lazy"
+          decoding="async"
+          className="project-image h-full w-full object-cover grayscale opacity-40"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-color)] via-transparent to-transparent opacity-60" />
+        
+        {/* Hover Overlay Actions */}
+        <div className="project-actions absolute inset-0 flex items-center justify-center gap-4 opacity-0">
+          {project.github && (
+            <a 
+              href={project.github} 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-action-btn p-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-xl"
+            >
+              <Github className="h-5 w-5" />
+            </a>
+          )}
+          <a 
+            href={project.link} 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="project-action-btn p-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white shadow-xl"
+          >
+            <ExternalLink className="h-5 w-5" />
+          </a>
+        </div>
+      </div>
+      
+      {/* Content */}
+      <div className="p-8 pt-2 flex flex-col flex-grow relative z-10">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="project-divider h-px w-8 bg-[var(--border-color)]" />
+          <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-[var(--accent-color)]/70">
+            {project.category}
+          </p>
+        </div>
+        
+        <h3 className="project-title text-3xl font-bold text-[var(--text-color)] mb-4 tracking-tight">
+          {project.title}
+        </h3>
+
+        <p className="project-description text-sm text-[var(--text-secondary)] leading-relaxed font-medium mb-8 line-clamp-2 opacity-70">
+          {project.description}
+        </p>
+
+        <div className="mt-auto flex flex-wrap gap-2">
+          {project.tags.map((tag: string) => (
+            <span 
+              key={tag} 
+              className="project-tag text-[8px] font-bold uppercase tracking-widest text-[var(--text-secondary)]/40 px-3 py-1.5 rounded-full border border-[var(--border-color)] shadow-sm"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <style>{`
+        .project-card {
+          --mouse-x: 50%;
+          --mouse-y: 50%;
+          transition: border-color 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .project-card:hover {
+          border-color: rgba(109, 124, 255, 0.3);
+          box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+        }
+
+        .project-spotlight {
+          opacity: 0;
+          background: radial-gradient(
+            600px circle at var(--mouse-x) var(--mouse-y),
+            rgba(109, 124, 255, 0.08),
+            transparent 80%
+          );
+          transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-spotlight {
+          opacity: 1;
+        }
+
+        .project-image {
+          transition: filter 0.7s ease, transform 0.7s ease, opacity 0.7s ease;
+        }
+
+        .project-card:hover .project-image {
+          filter: grayscale(0);
+          transform: scale(1.05);
+          opacity: 1;
+        }
+
+        .project-actions {
+          transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-actions {
+          opacity: 1;
+        }
+
+        .project-action-btn {
+          transition: all 0.3s ease;
+        }
+
+        .project-action-btn:hover {
+          background-color: var(--accent-color);
+          border-color: transparent;
+          transform: scale(1.1);
+        }
+
+        .project-action-btn:active {
+          transform: scale(0.9);
+        }
+
+        .project-divider {
+          transition: background-color 0.5s ease;
+        }
+
+        .project-card:hover .project-divider {
+          background-color: rgba(109, 124, 255, 0.5);
+        }
+
+        .project-title {
+          transition: color 0.5s ease;
+        }
+
+        .project-card:hover .project-title {
+          color: var(--accent-color);
+        }
+
+        .project-description {
+          transition: opacity 0.5s ease;
+        }
+
+        .project-card:hover .project-description {
+          opacity: 1;
+        }
+
+        .project-tag {
+          transition: border-color 0.5s ease;
+        }
+
+        .project-card:hover .project-tag {
+          border-color: rgba(109, 124, 255, 0.2);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .project-card,
+          .project-spotlight,
+          .project-image,
+          .project-actions,
+          .project-action-btn,
+          .project-divider,
+          .project-title,
+          .project-description,
+          .project-tag {
+            transition: none;
+          }
+          .project-card:hover .project-image {
+            transform: none;
+          }
+          .project-action-btn:hover,
+          .project-action-btn:active {
+            transform: none;
+          }
+        }
+      `}</style>
+    </motion.div>
+  );
+});
+
+ProjectCard.displayName = 'ProjectCard';
+
+const FilterButton: React.FC<{
+  filter: string;
+  isActive: boolean;
+  onClick: () => void;
+}> = React.memo(({ filter, isActive, onClick }) => {
+  return (
+    <button
+      onClick={onClick}
+      className={`filter-btn px-8 py-3.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] ${
+        isActive ? 'active' : ''
+      }`}
+    >
+      {filter}
+      
+      <style>{`
+        .filter-btn {
+          transition: all 0.3s ease;
+          background-color: rgba(var(--surface-color-rgb), 0.4);
+          color: var(--text-secondary);
+          border: 1px solid var(--border-color);
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-btn.active {
+          background-color: var(--accent-color);
+          color: white;
+          border-color: transparent;
+          box-shadow: 0 10px 30px rgba(109, 124, 255, 0.4);
+        }
+
+        .filter-btn:not(.active):hover {
+          border-color: rgba(109, 124, 255, 0.3);
+          color: var(--text-color);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .filter-btn {
+            transition: none;
+          }
+        }
+      `}</style>
+    </button>
+  );
+});
+
+FilterButton.displayName = 'FilterButton';
+
+export const Projects: React.FC = () => {
+  const [activeFilter, setActiveFilter] = useState('All');
+
+  const filteredProjects = useMemo(
+    () => activeFilter === 'All' 
+      ? PROJECTS 
+      : PROJECTS.filter(p => p.category === activeFilter),
+    [activeFilter]
+  );
+
+  return (
+    <div className="flex w-full flex-col justify-center px-6 md:px-12 lg:px-24">
+      <div className="max-w-7xl w-full mx-auto space-y-20">
+        <div className="reveal-child flex flex-col md:flex-row md:items-end justify-between gap-12">
+          <div className="space-y-6">
+            <h2 className="text-[10px] font-bold text-[var(--accent-color)] uppercase tracking-[0.5em]">Curated Portfolio</h2>
+            <p className="text-6xl md:text-8xl font-semibold text-[var(--text-color)] tracking-tighter leading-none">Selected Works</p>
+          </div>
+          
+          <div className="flex flex-wrap gap-3">
+            {FILTERS.map((filter) => (
+              <FilterButton
+                key={filter}
+                filter={filter}
+                isActive={activeFilter === filter}
+                onClick={() => setActiveFilter(filter)}
+              />
             ))}
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AnimatePresence>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-10 min-h-[500px]">
+          <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
               <motion.div
-                layout
                 key={project.id}
+                layout
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                className="h-full"
               >
-                <GlassCard className="h-full group hover:border-cyan-500/30 transition-colors" hoverEffect={true}>
-                  <div className="relative h-48 overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-slate-950/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4 backdrop-blur-sm">
-                      <button className="p-2 bg-white rounded-full text-slate-900 hover:scale-110 transition-transform">
-                        <a target="blank" href={project.github}>
-                          <Github size={20} />
-                        </a>
-                      </button>
-                      <button className="p-2 bg-white rounded-full text-slate-900 hover:scale-110 transition-transform">
-                       <a target="blank" href={project.externalLink} >
-                         <ExternalLink size={20} />
-                       </a>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="p-6">
-                    <span className="text-xs font-semibold text-cyan-400 uppercase tracking-wider">{project.category}</span>
-                    <h3 className="text-xl font-bold text-white mt-2 mb-3">{project.title}</h3>
-                    <p className="text-slate-300 text-sm mb-4 line-clamp-3">{project.description}</p>
-
-                    <div className="flex flex-wrap gap-2 mt-auto">
-                      {project.tech.map((t, i) => (
-                        <span key={i} className="text-xs px-2 py-1 rounded bg-white/5 border border-white/10 text-slate-100">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </GlassCard>
+                <ProjectCard project={project} />
               </motion.div>
             ))}
           </AnimatePresence>
-        </motion.div>
+        </div>
       </div>
-    </section>
+    </div>
   );
 };
-
-export default Projects;
