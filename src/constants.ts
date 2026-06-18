@@ -126,12 +126,38 @@ export const CERTIFICATES: Certificate[] = [
 
 export const EXPERIENCE: ExperienceItem[] = [
   {
-    role: 'Code Web Dev Member',
-    organization: 'GDG On-campus',
-    period: 'Sept 2025 — Present',
+    role: 'Software Developer Intern',
+    organization: 'Spaks Business Solutions Pvt. Ltd.',
+    type: 'Internship',
+    period: 'April 2026 — Present',
+    location: 'Sarita Vihar, Delhi, India',
     description: [
-    
-      'Collaborated with team Members to implement workshops.'
+      'Integrated third-party travel APIs (TBO) to enable real-time booking workflows across the platform.',
+      'Architected a polyglot backend using Node.js, Express, MongoDB, and PostgreSQL — isolating payment flows in a dedicated service with rate limiting, pagination, and resilience patterns.',
+      'Shipped SaaS-level production applications from scratch using Next.js, applying system design principles throughout the stack.',
+    ]
+  },
+  {
+    role: 'Full Stack Developer Intern',
+    organization: 'Web3task',
+    type: 'Internship',
+    period: 'Feb 2026 — April 2026',
+    location: 'Greater Noida, U.P, India',
+    description: [
+      'Shipped multiple production web pages with a focus on page speed, Core Web Vitals, and SEO best practices.',
+      'Implemented end-to-end localisation across frontend and backend for a live product with 100,000+ active users.',
+    ]
+  },
+  {
+    role: 'Web Development Member',
+    organization: 'GDG On-Campus',
+    type: 'Campus Club',
+    period: 'Sept 2025 — Present',
+    location: 'Noida, India',
+    description: [
+      'Organized developer workshops and tech talks for a community of 200+ students.',
+      'Built and maintained the club\'s web presence using React and modern frontend tooling.',
+      'Collaborated on open-source mini-projects aligned with Google technologies and developer ecosystems.',
     ]
   },
 ];

@@ -35,6 +35,8 @@ export interface ExperienceItem {
   role: string;
   organization: string;
   period: string;
+  type?: string;
+  location?: string;
   description: string[];
 }
 

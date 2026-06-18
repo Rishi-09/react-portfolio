@@ -128,11 +128,11 @@ export const About: React.FC = () => {
             </p>
             <div className="grid grid-cols-2 gap-12 pt-6 border-t border-[var(--border-color)]">
               <div>
-                <p className="text-4xl font-bold text-[var(--text-color)] tracking-tighter">8.2</p>
+                <p className="text-4xl font-bold text-[var(--text-color)] tracking-tighter">8.0</p>
                 <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-[var(--accent-color)] mt-2">CGPA Overall</p>
               </div>
               <div>
-                <p className="text-4xl font-bold text-[var(--text-color)] tracking-tighter">3rd Sem</p>
+                <p className="text-4xl font-bold text-[var(--text-color)] tracking-tighter">5th Sem</p>
                 <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-[var(--accent-color)] mt-2">B.Tech Cse</p>
               </div>
             </div>
