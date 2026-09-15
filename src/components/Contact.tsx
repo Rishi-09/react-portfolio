@@ -5,7 +5,7 @@ import { Magnetic } from "./Magnetic";
 
 export const Contact: React.FC = () => {
   const links = [
-    { name: "Direct Email", icon: Mail, value: "rishikm1215@gmail.com", url: "mailto:rishikm1215@gmail.com" },
+    { name: "Direct Email", icon: Mail, value: "rishikm215@gmail.com", url: "mailto:rishikm215@gmail.com" },
     { name: "Professional", icon: Linkedin, value: "in/rishi215", url: "https://linkedin.com/in/rishi215" },
     { name: "Repositories", icon: Github, value: "github.com/rishi-09", url: "https://github.com/rishi-09" },
     { name: "Current Location", icon: MapPin, value: "Noida", url: "#" },

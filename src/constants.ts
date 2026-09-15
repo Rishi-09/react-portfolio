@@ -1,6 +1,7 @@
 import ssg from './assets/ssg.png'
 import syranx from './assets/chatbot.png'
 import roomora from './assets/roomora.png'
+import eliteSyatra from './assets/elitesyatra.png'
 import innovertex from './assets/innovertex.png'
 import codeSlayer from './assets/codeslayer.png'
 import HackPirate from './assets/hackpirate.png'
@@ -22,6 +23,15 @@ export const COLORS = {
 };
 
 export const PROJECTS: Project[] = [
+  {
+    id: '4',
+    title: 'EliteSyatra',
+    category: 'Web App',
+    description: 'Production multi-tenant Travel SaaS with real-time flight & hotel booking, a two-tier markup engine, multi-role auth, and Razorpay payments.',
+    tags: ['Next.js', 'TypeScript', 'Express.js', 'PostgreSQL', 'MongoDB', 'Razorpay'],
+    link: 'https://elitesyatra.com',
+    imageUrl: eliteSyatra
+  },
   {
     id: '1',
     title: 'Syranx Ai',
@@ -56,20 +66,28 @@ export const PROJECTS: Project[] = [
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
+    name: 'Languages',
+    skills: ['JavaScript', 'TypeScript', 'Java (OOP, DSA)'],
+  },
+  {
     name: 'Frontend',
-    skills: ['HTML', 'CSS','React', 'TypeScript', 'Tailwind CSS','Bootstrap'],
+    skills: ['React.js', 'Next.js (App Router)', 'Redux', 'Tailwind CSS', 'Responsive Design'],
   },
   {
     name: 'Backend',
-    skills: ['Node.js', 'MongoDB', 'REST API', 'express.js','JWT'],
+    skills: ['Node.js', 'Express.js', 'REST APIs', 'JWT Auth', 'RBAC', 'MVC', 'Middleware'],
   },
   {
-    name: 'Core & Languages',
-    skills: ['JavaScript','Java', 'Python', 'Basic System Design Principles'],
+    name: 'Databases',
+    skills: ['MongoDB (Mongoose, Schema Design, Indexing)', 'PostgreSQL'],
   },
   {
-    name:'Tools',
-    skills:['Git','Github','Vercel','Postman','Render']
+    name: 'Architecture',
+    skills: ['Polyglot Persistence', 'Idempotent APIs', 'Webhook Processing', 'Rate Limiting', 'Payment Orchestration'],
+  },
+  {
+    name: 'Tools',
+    skills: ['Git', 'GitHub', 'Vercel', 'Railway', 'Postman', 'Firebase Studio', 'Cloudinary', 'Razorpay', 'Mapbox', 'Geoapify'],
   }
 ];
 
@@ -126,38 +144,42 @@ export const CERTIFICATES: Certificate[] = [
 
 export const EXPERIENCE: ExperienceItem[] = [
   {
-    role: 'Software Developer Intern',
+    role: 'Software Engineer Intern',
     organization: 'Spaks Business Solutions Pvt. Ltd.',
     type: 'Internship',
     period: 'April 2026 — Present',
-    location: 'Sarita Vihar, Delhi, India',
+    location: 'Delhi, India',
     description: [
-      'Integrated third-party travel APIs (TBO) to enable real-time booking workflows across the platform.',
-      'Architected a polyglot backend using Node.js, Express, MongoDB, and PostgreSQL — isolating payment flows in a dedicated service with rate limiting, pagination, and resilience patterns.',
-      'Shipped SaaS-level production applications from scratch using Next.js, applying system design principles throughout the stack.',
+      'Building elitesyatra.com, a production multi-tenant Travel SaaS — architected a monorepo platform with Next.js 16 (App Router) and a TypeScript/Express API server, deployed on Vercel + Railway with wildcard subdomain routing (*.elitesyatra.com).',
+      'Integrated TBO (Travel Boutique Online) APIs for real-time flight search, fare quoting, booking, and ticketing — completing the full certified 12-item API flow for flights and hotels.',
+      'Designed polyglot persistence with PostgreSQL as the source of truth for financial transactions and MongoDB for application data, backed by a healing worker that resolves cross-database sync failures.',
+      'Engineered a two-tier markup engine and multi-role auth (customer, agent, B2B agent, partner) with JWT and branded agent subdomains.',
+      'Implemented Razorpay payments with webhook signature verification, idempotent processing, atomic refund guards, and a dead-letter queue for failed transactions.',
+      'Built 6 typed Mongoose models with Cloudinary uploads, full CRUD, input validation, rate limiting, and paginated endpoints.',
     ]
   },
   {
     role: 'Full Stack Developer Intern',
-    organization: 'Web3task',
+    organization: 'Web3Task (MNC)',
     type: 'Internship',
     period: 'Feb 2026 — April 2026',
-    location: 'Greater Noida, U.P, India',
+    location: 'GTR Noida, India',
     description: [
-      'Shipped multiple production web pages with a focus on page speed, Core Web Vitals, and SEO best practices.',
-      'Implemented end-to-end localisation across frontend and backend for a live product with 100,000+ active users.',
+      'Contributed to VoiceToNotes.ai, a production app serving 100K+ users.',
+      'Shipped localization (i18n, Tolgee SDK) and push notification features on the live production app, coordinating deployments with cross-functional engineering teams.',
+      'Optimized static pages for Core Web Vitals and SEO, achieving ~30% faster load times across devices.',
+      'Worked with structured Git workflows, code reviews, and sprint-based delivery using Next.js and Firebase Studio.',
     ]
   },
   {
-    role: 'Web Development Member',
-    organization: 'GDG On-Campus',
+    role: 'Web Development Team Member',
+    organization: 'Google Developer Group (On Campus)',
     type: 'Campus Club',
     period: 'Sept 2025 — Present',
     location: 'Noida, India',
     description: [
-      'Organized developer workshops and tech talks for a community of 200+ students.',
-      'Built and maintained the club\'s web presence using React and modern frontend tooling.',
-      'Collaborated on open-source mini-projects aligned with Google technologies and developer ecosystems.',
+      'Conducted 3 technical workshops on web development fundamentals for peer students.',
+      'Part of the coding contest conducting and management team.',
     ]
   },
 ];
